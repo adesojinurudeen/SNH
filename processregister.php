@@ -1,48 +1,78 @@
-<?php
-print_r($_POST);
+<?php session_start();
+require_once('functions/user.php');
+
 //collecting the data
 
-$first_name=$_POST['first_name'];
-$last_name=$_POST['last_name'];
-$email=$_POST['email'];
-$password=$_POST['password'];
-$gender=$_POST['gender'];
-$designation=$_POST['designation'];
-$department=$_POST['department'];
+$errorCount = 0;
 
-$errorArray=[];
 //verifying the data validation
 
-if($first_name==""){
-    $errorArray="first_name cannot be blank";
-}
+$first_name=$_POST['first_name'] != "" ? $_POST['first_name'] : $errorCount++;
+$last_name=$_POST['last_name'] !="" ? $_POST['first_name'] : $errorCount++;
+$email=$_POST['email'] !="" ? $_POST['email'] : $errorCount++;
+$password=$_POST['password'] !="" ? $_POST['password'] : $errorCount++;
+$gender=$_POST['gender'] !="" ? $_POST['gender'] : $errorCount++;
+$designation=$_POST['designation'] !="" ? $_POST['designation'] : $errorCount++;
+$department=$_POST['department'] !="" ? $_POST['department'] : $errorCount++;
 
-if($last_name==""){
-    $errorArray="last_name cannot be blank";
-}
+$_SESSION['first_name'] =$first_name;
+$_SESSION['last_name'] =$last_name;
+$_SESSION['email'] =$email;
+$_SESSION['gender'] =$gender;
+$_SESSION['designation'] =$designation;
+$_SESSION['department'] =$department;
 
-if($email==""){
-    $errorArray="email cannot be blank";
-}
 
-if($password==""){
-    $errorArray="password cannot be blank";
-}
+if($errorCount>0){
+    
+    $session_error= "you have " . $errorCount . " error" ;
+        
+    if($errorCount > 1){
+       $session_error .= "s";
+    }
 
-if($gender==""){
-    $errorArray="gender must be selected";
-}
+    $session_error  .= " in your form submission";
+    $_SESSION["error"] = $session_error;
 
-if($designation==""){
-    $errorArray="you must identify your designation";
-}
+    header("Location: register.php");
 
-if($department==""){
-    $errorArray="department cannot be blank";
-}
 
-print_r($errorArray);
-//saving the data into database(folder)
+} else{
 
-//return back to the page, with status message
+    //count all users
+    //$allusers = scandir("db/users/");
+    //$countAllusers= count($allusers);
+    
+    $newUserId = ($countAllusers-1);
+
+    $userObject= [
+        "id"=>$newUserId,
+        "first_name"=>$first_name,
+        "last_name"=>$last_name,
+        "email"=>$email,
+        "password"=>password_hash($password, PASSWORD_DEFAULT), //password hashing
+        "gender"=>$gender,
+        "designation"=>$designation,
+        "department"=>$department
+    ];
+
+    //check if the user already exists.
+     $userExists =findUser($email);
+    
+
+      if($userExists){
+          $_SESSION["error"] = "Registration failed, user already exist";
+          header("Location: register.php");
+          die();
+      }
+    }
+
+        //save to database
+   
+    file_put_contents("db/users/".$email . ".json" , json_encode($userObject));
+    $_SESSION["message"] = "Registration Successful, you can now login" . $first_name;
+    header("Location: Login.php");
+
+
+
 ?>
