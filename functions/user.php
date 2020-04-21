@@ -1,6 +1,7 @@
-<?php  require_once('alert.php');
-    function is_user_LoggedIn(){
-        if($_SESSION['LoggedIn'] && !Empty($_SESSION['LoggedIn'])){
+<?php  require_once('alerts.php'); require_once('token.php'); //require_once('user.php');
+   function is_user_LoggedIn(){
+
+        if(isset($_SESSION['LoggedIn']) && !empty($_SESSION['LoggedIn'])){
             return true;
         }
         return false;
@@ -18,10 +19,10 @@
         return isset($_GET['token']);
     }
 
-    function findUser($mail = ""){
+    function find_User($email = ""){
         //check the database if the user exist
         if(!$email){
-            set_alert('error', 'User email not set');
+            set_alert('error', 'User Email not set');
             die();
         }
         $allusers = scandir("db/users/");
@@ -42,4 +43,9 @@
         }
             return false;
     }
+
+    function save_user($userObject){
+    file_put_contents("db/users/". $userObject['email'] . ".json" , json_encode($userObject));
+    }
+
 ?>

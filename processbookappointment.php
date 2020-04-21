@@ -21,7 +21,7 @@ if($errorCount > 0){
         $session_error .= "s";
     }
 
-    $session_error  .= " in your form submission";
+    $session_error  .= " in your appointment form";
     
     set_alert('error'. $session_error);
     
@@ -30,7 +30,7 @@ if($errorCount > 0){
 }else{
     //echo "No errors";
 
-    $currentuser = find_User($email);
+  /*  $currentuser = find_User($email);
 
         if($currentuser){
          
@@ -50,13 +50,13 @@ if($errorCount > 0){
             redirect_to("dashboard.php");      
             die();
 
-            }
+            }*/
          
         }
 
    set_alert('error', " Invalid Email or Password" );
-   redirect_to("Login.php");
+   redirect_to("bookappointment.php");
    die();
 
-}
+//}
 ?>

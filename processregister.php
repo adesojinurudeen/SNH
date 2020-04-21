@@ -15,20 +15,20 @@ $gender=$_POST['gender'] !="" ? $_POST['gender'] : $errorCount++;
 $designation=$_POST['designation'] !="" ? $_POST['designation'] : $errorCount++;
 $department=$_POST['department'] !="" ? $_POST['department'] : $errorCount++;
 
-$_SESSION['first_name'] =$first_name;
-$_SESSION['last_name'] =$last_name;
-$_SESSION['email'] =$email;
-$_SESSION['gender'] =$gender;
-$_SESSION['designation'] =$designation;
-$_SESSION['department'] =$department;
+$_SESSION['first_name'] = $first_name;
+$_SESSION['last_name'] = $last_name;
+$_SESSION['email'] = $email;
+$_SESSION['gender'] = $gender;
+$_SESSION['designation'] = $designation;
+$_SESSION['department'] = $department;
 
 
-if($errorCount>0){
+if($errorCount > 0){
     
-    $session_error= "you have " . $errorCount . " error" ;
+    $session_error = "you have " . $errorCount . " error" ;
         
-    if($errorCount > 1){
-       $session_error .= "s";
+   if($errorCount > 1){
+      $session_error .= "s";
     }
 
     $session_error  .= " in your form submission";
@@ -40,7 +40,7 @@ if($errorCount>0){
 } else{
 
     //count all users
-    //$allusers = scandir("db/users/");
+   // $allusers = scandir("db/users/");
     //$countAllusers= count($allusers);
     
     $newUserId = ($countAllusers-1);
@@ -57,7 +57,7 @@ if($errorCount>0){
     ];
 
     //check if the user already exists.
-     $userExists =findUser($email);
+     $userExists = find_user($email);
     
 
       if($userExists){
@@ -65,11 +65,11 @@ if($errorCount>0){
           header("Location: register.php");
           die();
       }
+    
     }
-
         //save to database
-   
-    file_put_contents("db/users/".$email . ".json" , json_encode($userObject));
+    
+    save_user($userObject);
     $_SESSION["message"] = "Registration Successful, you can now login" . $first_name;
     header("Location: Login.php");
 

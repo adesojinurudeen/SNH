@@ -3,11 +3,14 @@
 function print_alert(){
     //for printing messages or error;
     $types = ['message','info','error'];
-    $color= ['green','grey','red'];
-    for($i=0; $i<count($types); $i++){
-        if( isset($_SESSION[$types[$i]]) && !empty($_SESSION[$types[$i]])) {
-            echo "<span style='color:".$color[$i]."'>" .$_SESSION[$types[$i]] . "</span>";
-           session_destroy();
+    $color= ['success','info','danger'];
+
+    for($i=0; $i < count($types); $i++){
+        if(isset($_SESSION[$types[$i]]) && !empty($_SESSION[$types[$i]])) {
+          echo  "<div class='alert alert-".$color[$i]."' role='alert'>" .$_SESSION[$types[$i]].
+                 "</div>";
+         //echo "<span style='color:".$color[$i]."'>" .$_SESSION[$types[$i]] . "</span>";
+         session_destroy();  
         }
     }
 
