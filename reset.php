@@ -2,7 +2,7 @@
 require_once('functions/alerts.php');
 require_once('functions/user.php');
 require_once('functions/email.php');
-
+require_once('functions/token.php');
 
  //TO DO: fix session error message display on login page
 

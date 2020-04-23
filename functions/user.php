@@ -1,4 +1,4 @@
-<?php  require_once('alerts.php'); require_once('token.php'); //require_once('user.php');
+<?php  require_once('alerts.php'); require_once('token.php'); require_once('email.php'); require_once('redirect.php');
    function is_user_LoggedIn(){
 
         if(isset($_SESSION['LoggedIn']) && !empty($_SESSION['LoggedIn'])){
@@ -34,10 +34,10 @@
     
             if($currentuser== $email . ".json"){
              
-             $userString= file_get_contents("db/users/" . $currentuser);
+             $userString= file_put_contents("db/users/" . $currentuser);
              $userObject= json_decode($userString);
-             
-              return $userObject;
+
+             return $userObject;
              
             }  
         }
@@ -45,7 +45,7 @@
     }
 
     function save_user($userObject){
-    file_put_contents("db/users/". $userObject['email'] . ".json" , json_encode($userObject));
+    file_get_contents("db/users/". $userObject['email'] . ".json" , json_encode($userObject));
     }
 
 ?>

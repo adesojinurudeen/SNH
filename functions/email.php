@@ -1,4 +1,5 @@
-<?php require_once('alerts.php'); require_once('redirect.php'); 
+<?php require_once('alerts.php'); require_once('redirect.php'); require_once('user.php'); 
+
 
  function send_email(
      $subject ="",

@@ -17,14 +17,9 @@ if(!isset($_SESSION['LoggedIn'])){
     <div>
         <h3>Dashboard</h3>
 
-        Welcome, <?php echo $_SESSION['fullname'] ?> You are logged in as (<?php echo 
+        Welcome, <?php echo $_SESSION['username'] ?> You are logged in as (<?php echo 
         $_SESSION['role'] ?>). and your ID is <?php echo $_SESSION['LoggedIn'] ?>
     </div>
-    <div>
-    <a class="btn btn-bg btn-outline-secondary" href="billpayment.php">Bill Payment</a>
-    </div>
-    <div>
-        <a class="btn btn-bg btn-outline-secondary" href="bookappointment.php">Patients Appointment Form                    </a>
-    </div>
+    
 </div>
 <?php include_once('lib/footer.php');?>

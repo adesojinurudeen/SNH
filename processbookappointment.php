@@ -28,9 +28,9 @@ if($errorCount > 0){
     redirect_to("Login.php");
     
 }else{
-    //echo "No errors";
+    echo "No errors";
 
-  /*  $currentuser = find_User($email);
+   $currentuser = find_User($email);
 
         if($currentuser){
          
@@ -50,7 +50,7 @@ if($errorCount > 0){
             redirect_to("dashboard.php");      
             die();
 
-            }*/
+            }
          
         }
 

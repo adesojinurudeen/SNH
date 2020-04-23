@@ -5,7 +5,7 @@
 
 if(isset($_SESSION['LoggedIn']) && !empty($_SESSION['LoggedIn'])){
     //redirect to Dashboard
-    header("Location: dashboard.php");
+   header("Location: MTdashboard.php");
 }
 
 //include_once('lib/header.php');

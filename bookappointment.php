@@ -1,8 +1,8 @@
 <?php include_once('lib/header.php'); require_once('functions/alerts.php');
-/*if(isset($_SESSION['LoggedIn']) && !empty($_SESSION['LoggedIn'])){
+if(!isset($_SESSION['LoggedIn'])){
     //redirect to Dashboard
-    header("Location: dashboard.php");
-}*/
+    header("Location: Login.php");
+}
 
 ?>
  <div class="container">
@@ -16,7 +16,7 @@
      <p>All fields are required</p>
  </div>
 <div class="row col-6">
-<form method="POST" action="dashboard.php">
+<form method="POST" action="processbookappointment.php">
      <p>
          <?php print_alert(); ?>
      </p>
@@ -98,7 +98,7 @@
          >physcioteraphy</option>
          <option
              <?php
-             if(isset($_SESSION['gender']) && $_SESSION['gender'] == 'Female'){
+             if(isset($_SESSION['department to visit']) && $_SESSION['department to visit'] == 'Nephrology'){
                  echo "selected";
                  
              }
@@ -106,15 +106,15 @@
          >nephrology  </option>
          <option
              <?php
-             if(isset($_SESSION['gender']) && $_SESSION['gender'] == 'Female'){
+             if(isset($_SESSION['department to visit']) && $_SESSION['department to visit'] == 'dentistry'){
                  echo "selected";
                  
              }
              ?>
-         >Dentist  </option>
+         >Dentistry  </option>
          <option
              <?php
-             if(isset($_SESSION['gender']) && $_SESSION['gender'] == 'Female'){
+             if(isset($_SESSION['department to visit']) && $_SESSION['department to visit'] == 'others'){
                  echo "selected";
                  
              }

@@ -1,7 +1,7 @@
 <?php include_once('lib/header.php'); require_once('functions/alerts.php');
 if(isset($_SESSION['LoggedIn']) && !empty($_SESSION['LoggedIn'])){
     //redirect to Dashboard
-    header("Location: dashboard.php");
+    header("Location: MTdashboard.php");  header("Location: patientsdashboard.php");
 }
 
 ?>
